@@ -16,7 +16,6 @@ TBD
 
 * JavaScript
 * HTML5
-* React/Redux
 * CSS
 
 ## Wireframes
