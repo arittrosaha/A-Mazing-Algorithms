@@ -1,0 +1,24 @@
+{
+  "name": "maze-solver",
+  "version": "1.0.0",
+  "description": "Live demo link (TBD)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arittrosaha/Maze-Solver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arittrosaha/Maze-Solver/issues"
+  },
+  "homepage": "https://github.com/arittrosaha/Maze-Solver#readme",
+  "dependencies": {
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.4"
+  }
+}
