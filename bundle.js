@@ -183,7 +183,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const maze = Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(20, _solvers_dfs_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  // const genPromise = new Promise(function(resolve, reject) {
+  //   const maze = dfsGen(20);
+  //   if (maze.length === 625) {
+  //     resolve(maze);
+  //   } else {
+  //     reject("Something broke!");
+  //   }
+  // });
+  //
+  // genPromise.then( maze => {
+  //   dfsSolve(maze);
+  //   console.log(maze);
+  // });
+
+  const maze = Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(10, _solvers_dfs_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
 });
 
 
@@ -245,7 +259,7 @@ function Cell(i, j, w, ctx, grid, cols, rows) {
     const y = this.j*w;
 
 
-    // buildWalls(x, y, w, ctx, this.walls);
+    // buildWalls(x, y, w, ctx, this.walls, 'white');
 
     if (this.visited && !this.explored) {
       buildWalls(x, y, w, ctx, this.walls, 'red');
@@ -275,7 +289,7 @@ function buildWalls(x, y, w, ctx, walls, color){
 
   [0,1,2,3].forEach(i=>{
     if (walls[i]){
-      ctx.strokeStyle = 'white';
+      ctx.strokeStyle = 'black';
       ctx.lineWidth = 2;
       wallfunc[i](x, y, w, ctx);
     } else {
