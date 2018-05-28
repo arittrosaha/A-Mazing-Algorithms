@@ -38,9 +38,8 @@ export default function dfsGen (width, callback) {
       const max = grid.length-1;
       const targetIdx = getRandomIntInclusive(min, max);
       grid[targetIdx].target = true;
-      debugger;
-      grid[targetIdx].show('lightskyblue');
-      grid[targetIdx].highlight('lightskyblue');
+      grid[targetIdx].show('orange');
+      grid[targetIdx].highlight('orange');
 
       callback(grid);
     }
@@ -49,7 +48,7 @@ export default function dfsGen (width, callback) {
 
 function selectNeighbour (neighbours) {
   if (neighbours.length > 0) {
-    const random = getRandomIntInclusive(0, neighbours.length-1); // Math.floor(Math.random() * 10 % neighbours.length);
+    const random = getRandomIntInclusive(0, neighbours.length-1); 
     return neighbours[random];
   }
 }

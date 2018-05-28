@@ -2,7 +2,7 @@
 export default function dfsSolve(maze) {
   const stack = [];
   let targetFound = false;
-  let color = 'lightgreen';
+  let color = 'green';
   let neighbours;
   let next;
 
@@ -13,9 +13,9 @@ export default function dfsSolve(maze) {
 
     if (current.target === true){
       targetFound = true;
-      color = 'green';
-      current.highlight('lightskyblue');
-      current.show('lightskyblue');
+      color = 'blue';
+      current.highlight('orange');
+      current.show('orange');
     }
 
     if (targetFound === false) {
@@ -26,7 +26,7 @@ export default function dfsSolve(maze) {
     if (next && !next.explored) {
       next.explored = true;
       stack.push(current);
-      current.show('lightgreen');
+      current.show(color);
       next.highlight('yellow');
       current = next;
     } else if (stack.length > 0){

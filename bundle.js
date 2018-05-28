@@ -122,9 +122,8 @@ function dfsGen (width, callback) {
       const max = grid.length-1;
       const targetIdx = getRandomIntInclusive(min, max);
       grid[targetIdx].target = true;
-      debugger;
-      grid[targetIdx].show('lightskyblue');
-      grid[targetIdx].highlight('lightskyblue');
+      grid[targetIdx].show('orange');
+      grid[targetIdx].highlight('orange');
 
       callback(grid);
     }
@@ -133,7 +132,7 @@ function dfsGen (width, callback) {
 
 function selectNeighbour (neighbours) {
   if (neighbours.length > 0) {
-    const random = getRandomIntInclusive(0, neighbours.length-1); // Math.floor(Math.random() * 10 % neighbours.length);
+    const random = getRandomIntInclusive(0, neighbours.length-1); 
     return neighbours[random];
   }
 }
@@ -259,19 +258,18 @@ function Cell(i, j, w, ctx, grid, cols, rows) {
     const y = this.j*w;
 
 
-    // buildWalls(x, y, w, ctx, this.walls, 'white');
+    buildWalls(x, y, w, ctx, this.walls);
 
     if (this.visited && !this.explored) {
-      buildWalls(x, y, w, ctx, this.walls, 'red');
       ctx.fillStyle = 'red';
       ctx.fillRect(x, y, w, w);
+      buildWalls(x, y, w, ctx, this.walls);
     }
 
     if (this.explored) {
-      // buildWalls(x, y, w, ctx, this.walls, 'black');
-      buildWalls(x, y, w, ctx, this.walls, color);
       ctx.fillStyle = color;
       ctx.fillRect(x, y, w, w);
+      buildWalls(x, y, w, ctx, this.walls);
     }
   };
 }
@@ -283,17 +281,13 @@ function index (i, j, cols, rows) {
   return i + (j * cols);
 }
 
-function buildWalls(x, y, w, ctx, walls, color){
+function buildWalls(x, y, w, ctx, walls){
 
   const wallfunc = [topWall, rightWall, bottomWall, leftWall];
 
   [0,1,2,3].forEach(i=>{
     if (walls[i]){
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = 2;
-      wallfunc[i](x, y, w, ctx);
-    } else {
-      ctx.strokeStyle = color;
+      ctx.strokeStyle = 'white';
       ctx.lineWidth = 2;
       wallfunc[i](x, y, w, ctx);
     }
@@ -319,8 +313,8 @@ function rightWall(x, y, w, ctx){
 
 function bottomWall(x, y, w, ctx){
   ctx.beginPath();
-  ctx.moveTo(x+w, y+w);
-  ctx.lineTo(x, y+w);
+  ctx.moveTo(x+w, (y+w));
+  ctx.lineTo(x, (y+w));
   ctx.stroke();
 
 }
@@ -395,7 +389,7 @@ __webpack_require__.r(__webpack_exports__);
 function dfsSolve(maze) {
   const stack = [];
   let targetFound = false;
-  let color = 'lightgreen';
+  let color = 'green';
   let neighbours;
   let next;
 
@@ -406,9 +400,9 @@ function dfsSolve(maze) {
 
     if (current.target === true){
       targetFound = true;
-      color = 'green';
-      current.highlight('lightskyblue');
-      current.show('lightskyblue');
+      color = 'blue';
+      current.highlight('orange');
+      current.show('orange');
     }
 
     if (targetFound === false) {
@@ -419,7 +413,7 @@ function dfsSolve(maze) {
     if (next && !next.explored) {
       next.explored = true;
       stack.push(current);
-      current.show('lightgreen');
+      current.show(color);
       next.highlight('yellow');
       current = next;
     } else if (stack.length > 0){

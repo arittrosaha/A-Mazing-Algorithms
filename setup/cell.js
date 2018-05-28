@@ -44,19 +44,18 @@ export default function Cell(i, j, w, ctx, grid, cols, rows) {
     const y = this.j*w;
 
 
-    // buildWalls(x, y, w, ctx, this.walls, 'white');
+    buildWalls(x, y, w, ctx, this.walls);
 
     if (this.visited && !this.explored) {
-      buildWalls(x, y, w, ctx, this.walls, 'red');
       ctx.fillStyle = 'red';
       ctx.fillRect(x, y, w, w);
+      buildWalls(x, y, w, ctx, this.walls);
     }
 
     if (this.explored) {
-      // buildWalls(x, y, w, ctx, this.walls, 'black');
-      buildWalls(x, y, w, ctx, this.walls, color);
       ctx.fillStyle = color;
       ctx.fillRect(x, y, w, w);
+      buildWalls(x, y, w, ctx, this.walls);
     }
   };
 }
@@ -68,17 +67,13 @@ function index (i, j, cols, rows) {
   return i + (j * cols);
 }
 
-function buildWalls(x, y, w, ctx, walls, color){
+function buildWalls(x, y, w, ctx, walls){
 
   const wallfunc = [topWall, rightWall, bottomWall, leftWall];
 
   [0,1,2,3].forEach(i=>{
     if (walls[i]){
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = 2;
-      wallfunc[i](x, y, w, ctx);
-    } else {
-      ctx.strokeStyle = color;
+      ctx.strokeStyle = 'white';
       ctx.lineWidth = 2;
       wallfunc[i](x, y, w, ctx);
     }
@@ -104,8 +99,8 @@ function rightWall(x, y, w, ctx){
 
 function bottomWall(x, y, w, ctx){
   ctx.beginPath();
-  ctx.moveTo(x+w, y+w);
-  ctx.lineTo(x, y+w);
+  ctx.moveTo(x+w, (y+w));
+  ctx.lineTo(x, (y+w));
   ctx.stroke();
 
 }
