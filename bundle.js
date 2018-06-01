@@ -81,11 +81,23 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return dfsGen; });
-/* harmony import */ var _setup_grid_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../setup/grid.js */ "./setup/grid.js");
+/* harmony import */ var _solvers_dfs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../solvers/dfs.js */ "./solvers/dfs.js");
+/* harmony import */ var _solvers_bfs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../solvers/bfs.js */ "./solvers/bfs.js");
 
 
-function dfsGen (width, callback) {
-  const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_0__["default"](width);
+
+
+function dfsGen (grid, width) {
+  const dfsGenButton = document.getElementById('dfs-gen');
+  dfsGenButton.disabled = true;
+
+  const dfsSolButton = document.getElementById('dfs-sol');
+  dfsSolButton.disabled = true;
+
+  const bfsSolButton = document.getElementById('bfs-sol');
+  bfsSolButton.disabled = true;
+
+
   const stack = [];
 
   const mC = document.getElementById('myCanvas');
@@ -96,6 +108,7 @@ function dfsGen (width, callback) {
   let current = grid[0];
   current.highlight('yellow');
   current.visited = true;
+
   const interval =  setInterval( () => {
     current.show();
 
@@ -103,6 +116,7 @@ function dfsGen (width, callback) {
     const next = selectNeighbour(neighbours);
     if (next) {
       next.visited = true;
+      next.parent = current;
       stack.push(current);
       removeWalls(current, next);
       current.show();
@@ -122,17 +136,27 @@ function dfsGen (width, callback) {
       const max = grid.length-1;
       const targetIdx = getRandomIntInclusive(min, max);
       grid[targetIdx].target = true;
-      grid[targetIdx].show('orange');
-      grid[targetIdx].highlight('orange');
+      grid[targetIdx].show('lightskyblue');
+      grid[targetIdx].highlight('lightskyblue');
 
-      callback(grid);
+      dfsSolButton.disabled = false;
+      dfsSolButton.onclick = function() {
+        Object(_solvers_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid);
+      };
+
+      bfsSolButton.disabled = false;
+      bfsSolButton.onclick = function() {
+        Object(_solvers_bfs_js__WEBPACK_IMPORTED_MODULE_1__["default"])(grid);
+      };
+
+      dfsGenButton.disabled = false;
     }
   }, 1);
 }
 
 function selectNeighbour (neighbours) {
   if (neighbours.length > 0) {
-    const random = getRandomIntInclusive(0, neighbours.length-1); 
+    const random = getRandomIntInclusive(0, neighbours.length-1);
     return neighbours[random];
   }
 }
@@ -176,27 +200,21 @@ function getRandomIntInclusive(min, max) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generators/dfs.js */ "./generators/dfs.js");
-/* harmony import */ var _solvers_dfs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./solvers/dfs.js */ "./solvers/dfs.js");
+/* harmony import */ var _setup_grid_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./setup/grid.js */ "./setup/grid.js");
 // import setupGrid from './grid.js';
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  // const genPromise = new Promise(function(resolve, reject) {
-  //   const maze = dfsGen(20);
-  //   if (maze.length === 625) {
-  //     resolve(maze);
-  //   } else {
-  //     reject("Something broke!");
-  //   }
-  // });
-  //
-  // genPromise.then( maze => {
-  //   dfsSolve(maze);
-  //   console.log(maze);
-  // });
 
-  const maze = Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(10, _solvers_dfs_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  const initGrid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_1__["SetupGrid"](10);
+
+  const dfsGenButton = document.getElementById('dfs-gen');
+  let maze;
+  dfsGenButton.onclick = function() {
+    const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_1__["SetupGrid"](10);
+    Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid, 10);
+  };
 });
 
 
@@ -219,6 +237,7 @@ function Cell(i, j, w, ctx, grid, cols, rows) {
   this.explored = false;
   this.walls = [true, true, true, true];
   this.target = false;
+  this.parent = null;
 
   this.highlight = function(color) {
     const x  = this.i*w;
@@ -334,12 +353,13 @@ function leftWall(x, y, w, ctx){
 /*!***********************!*\
   !*** ./setup/grid.js ***!
   \***********************/
-/*! exports provided: default */
+/*! exports provided: SetupGrid, draw */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SetupGrid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetupGrid", function() { return SetupGrid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "draw", function() { return draw; });
 /* harmony import */ var _cell_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cell.js */ "./setup/cell.js");
 
 
@@ -349,6 +369,9 @@ function SetupGrid(width) {
   this.ctx = this.mC.getContext("2d");
   this.cWidth = this.mC.width;
   this.cHeight = this.mC.height;
+
+  this.ctx.fillStyle = "black";
+  this.ctx.fillRect(0,0, this.cWidth, this.cHeight);
 
   this.cols = Math.floor(this.cWidth/width);
   this.rows = Math.floor(this.cHeight/width);
@@ -367,9 +390,128 @@ function SetupGrid(width) {
 
 function draw (grid) {
   for (let i = 0; i < grid.length; i++) {
+    grid[i].explored = false;
     grid[i].show();
+    if (grid[i].target === true) {
+      grid[i].highlight('lightskyblue');
+    }
   }
 
+}
+
+
+/***/ }),
+
+/***/ "./solvers/bfs.js":
+/*!************************!*\
+  !*** ./solvers/bfs.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return bfsSolve; });
+/* harmony import */ var _setup_grid_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../setup/grid.js */ "./setup/grid.js");
+
+
+function bfsSolve(maze) {
+  const bfsSolButton = document.getElementById('bfs-sol');
+  bfsSolButton.disabled = true;
+
+  const dfsSolButton = document.getElementById('dfs-sol');
+  dfsSolButton.disabled = true;
+
+  const dfsGenButton = document.getElementById('dfs-gen');
+  dfsGenButton.disabled = true;
+
+  Object(_setup_grid_js__WEBPACK_IMPORTED_MODULE_0__["draw"])(maze);
+
+  const queue = [];
+  const exploredPaths = [];
+  let targetFound = false;
+  let color = 'green';
+  let neighbours;
+  let nextPaths;
+
+  let current = maze[0];
+  current.explored = true;
+
+  const interval =  setInterval( () => {
+
+    current.highlight(color);
+    current.show(color);
+
+    if (exploredPaths.length > 0){
+      exploredPaths.forEach( () => {
+        exploredPaths.pop().show(color);
+      });
+    }
+
+    if (targetFound === false) {
+       neighbours = current.neighbours("explored");
+       nextPaths = selectNeighbour(current, neighbours);
+    }
+
+    if (nextPaths && targetFound === false) {
+      for (let i = 0; i < nextPaths.length; i++) {
+        nextPaths[i].highlight('yellow');
+        nextPaths[i].explored = true;
+        if (nextPaths[i].target === true){
+          targetFound = true;
+          color = 'blue';
+          nextPaths[i].highlight('lightskyblue');
+          nextPaths[i].show('lightskyblue');
+          current = nextPaths[i];
+          break;
+        } else {
+          exploredPaths.push(nextPaths[i]);
+          queue.push(nextPaths[i]);
+        }
+      }
+    }
+
+    if (targetFound === false) {
+      current = queue.shift();
+    }
+
+    if (targetFound === true) {
+      current = current.parent;
+      current.highlight('yellow');
+    }
+
+
+    if (current === maze[0]) {
+      clearInterval(interval);
+      dfsGenButton.disabled = false;
+      bfsSolButton.disabled = false;
+      dfsSolButton.disabled = false;
+    }
+  }, 1);
+}
+
+function selectNeighbour (current, neighbours) {
+  const walls = current.walls;
+  const nextPaths = [];
+
+  neighbours.forEach( neighbour => {
+    const x = current.i - neighbour.i;
+    const y = current.j - neighbour.j;
+
+    if (x === -1 && !walls[1]) {
+      nextPaths.push(neighbour);
+    } else if (x === 1 && !walls[3]) {
+      nextPaths.push(neighbour);
+    }
+
+    if (y === -1 && !walls[2]) {
+      nextPaths.push(neighbour);
+    } else if (y === 1 && !walls[0]) {
+      nextPaths.push(neighbour);
+    }
+  });
+
+  return nextPaths;
 }
 
 
@@ -385,8 +527,21 @@ function draw (grid) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return dfsSolve; });
+/* harmony import */ var _setup_grid_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../setup/grid.js */ "./setup/grid.js");
+
 
 function dfsSolve(maze) {
+  const dfsSolButton = document.getElementById('dfs-sol');
+  dfsSolButton.disabled = true;
+
+  const dfsGenButton = document.getElementById('dfs-gen');
+  dfsGenButton.disabled = true;
+
+  const bfsSolButton = document.getElementById('bfs-sol');
+  bfsSolButton.disabled = true;
+
+  Object(_setup_grid_js__WEBPACK_IMPORTED_MODULE_0__["draw"])(maze);
+
   const stack = [];
   let targetFound = false;
   let color = 'green';
@@ -395,14 +550,15 @@ function dfsSolve(maze) {
 
   let current = maze[0];
   current.explored = true;
+
   const interval =  setInterval( () => {
     current.show(color);
 
     if (current.target === true){
       targetFound = true;
       color = 'blue';
-      current.highlight('orange');
-      current.show('orange');
+      current.highlight('lightskyblue');
+      current.show('lightskyblue');
     }
 
     if (targetFound === false) {
@@ -424,6 +580,9 @@ function dfsSolve(maze) {
 
     if (current === maze[0]) {
       clearInterval(interval);
+      dfsGenButton.disabled = false;
+      dfsSolButton.disabled = false;
+      bfsSolButton.disabled = false;
     }
   }, 1);
 }

@@ -1,7 +1,18 @@
-import SetupGrid from '../setup/grid.js';
+import dfsSolve from '../solvers/dfs.js';
+import bfsSolve from '../solvers/bfs.js';
 
-export default function dfsGen (width, callback) {
-  const grid = new SetupGrid(width);
+
+export default function dfsGen (grid, width) {
+  const dfsGenButton = document.getElementById('dfs-gen');
+  dfsGenButton.disabled = true;
+
+  const dfsSolButton = document.getElementById('dfs-sol');
+  dfsSolButton.disabled = true;
+
+  const bfsSolButton = document.getElementById('bfs-sol');
+  bfsSolButton.disabled = true;
+
+
   const stack = [];
 
   const mC = document.getElementById('myCanvas');
@@ -12,6 +23,7 @@ export default function dfsGen (width, callback) {
   let current = grid[0];
   current.highlight('yellow');
   current.visited = true;
+
   const interval =  setInterval( () => {
     current.show();
 
@@ -19,6 +31,7 @@ export default function dfsGen (width, callback) {
     const next = selectNeighbour(neighbours);
     if (next) {
       next.visited = true;
+      next.parent = current;
       stack.push(current);
       removeWalls(current, next);
       current.show();
@@ -38,17 +51,27 @@ export default function dfsGen (width, callback) {
       const max = grid.length-1;
       const targetIdx = getRandomIntInclusive(min, max);
       grid[targetIdx].target = true;
-      grid[targetIdx].show('orange');
-      grid[targetIdx].highlight('orange');
+      grid[targetIdx].show('lightskyblue');
+      grid[targetIdx].highlight('lightskyblue');
 
-      callback(grid);
+      dfsSolButton.disabled = false;
+      dfsSolButton.onclick = function() {
+        dfsSolve(grid);
+      };
+
+      bfsSolButton.disabled = false;
+      bfsSolButton.onclick = function() {
+        bfsSolve(grid);
+      };
+
+      dfsGenButton.disabled = false;
     }
   }, 1);
 }
 
 function selectNeighbour (neighbours) {
   if (neighbours.length > 0) {
-    const random = getRandomIntInclusive(0, neighbours.length-1); 
+    const random = getRandomIntInclusive(0, neighbours.length-1);
     return neighbours[random];
   }
 }

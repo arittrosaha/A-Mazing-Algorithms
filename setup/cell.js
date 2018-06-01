@@ -5,6 +5,7 @@ export default function Cell(i, j, w, ctx, grid, cols, rows) {
   this.explored = false;
   this.walls = [true, true, true, true];
   this.target = false;
+  this.parent = null;
 
   this.highlight = function(color) {
     const x  = this.i*w;

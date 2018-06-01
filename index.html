@@ -5,8 +5,69 @@
     <title>Maze Solver</title>
     <script src="bundle.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   </head>
   <body>
-    <canvas id="myCanvas" height='500' width='500'></canvas>
+    <div class='header'>
+      <div class='game-name'>A Mazing Algorithms</div>
+      <div class="author">by
+        <div class="author-name">Aritra Saha</div>
+      </div>
+      <div class="links">
+        <a class='link-github' href="https://github.com/arittrosaha/A-Mazing-Algorithms">
+          <i title='Source code' class="fab fa-github fa-lg"></i>
+        </a>
+        <a class='link-linkedin' href="https://www.linkedin.com/in/aritra-saha-0130/">
+          <i title="Author's LinkedIn Profile" class="fab fa-linkedin fa-lg"></i>
+        </a>
+      </div>
+    </div>
+    <div class='container-index'>
+      <!-- <label class='label-index'>Index</label> -->
+      <div class="index-wall">
+        <div class="black">
+          <div class="white"></div>
+        </div>
+        <div class="description">
+          : Wall
+        </div>
+      </div>
+      <div class="index-red">
+        <div class="color-red" style="background-color:red"></div>
+        <div class="description">
+          : Built Maze
+        </div>
+      </div>
+      <div class="index-lightskyblue">
+        <div class="color-lightskyblue" style="background-color:lightskyblue"></div>
+        <div class="description">
+          : Finish
+        </div>
+      </div>
+      <div class="index-green">
+        <div class="color-green" style="background-color:green"></div>
+        <div class="description">
+          : Explored Maze
+        </div>
+      </div>
+      <div class="index-blue">
+        <div class="color-blue" style="background-color:blue"></div>
+        <div class="description">
+          : Shortest Path Back
+        </div>
+      </div>
+    </div>
+    <div class="canvas">
+      <div class='control-bar'>
+        <label class='label-maze'>Generate Maze</label>
+        <input id='dfs-gen' type='button' class='button' value="Using DFS">
+      </div>
+      <canvas id="myCanvas" height='500' width='500'></canvas>
+      <div class="control-bar">
+        <label class='label-maze'>Solve Maze</label>
+        <input id='dfs-sol' type='button' class='button' value='Using DFS'>
+        <input id='bfs-sol' type='button' class='button' value='Using BFS'>
+      </div>
+    </div>
   </body>
 </html>

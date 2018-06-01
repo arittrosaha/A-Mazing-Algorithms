@@ -1,11 +1,190 @@
+
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: sans-serif;
+  background-color: black;
+  color: white;
+}
+
+.canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 520px;
 }
 
 #myCanvas {
+  border: 10px inset;
+  border-radius: 5px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 40px;
+  margin-bottom: 30px;
+}
+
+.game-name {
+  font-size: 30px;
+  font-weight: bold;
+  color: red;
+  text-shadow: none;
+  margin-bottom: 5px;
+  animation-timing-function: step-end, linear;
+  animation-name: flicker, on;
+  animation-delay: 0s, 2s;
+  animation-duration: 1s, 1s;
+  animation-fill-mode: forwards, forwards;
+
+}
+
+  @-webkit-keyframes flicker {
+    75%  {
+      color: white;
+      text-shadow:
+        0 0 5px white,
+        0 0 10px white,
+        0 0 20px red,
+        0 0 30px red,
+        0 0 40px red,
+        0 0 55px red,
+        0 0 75px red;
+    }
+
+    100% {
+        color: red; text-shadow: none
+    }
+  }
+
+  @-webkit-keyframes on {
+    100%  {
+      color: white;
+      text-shadow:
+        0 0 5px white,
+        0 0 10px white,
+        0 0 20px red,
+        0 0 30px red,
+        0 0 40px red,
+        0 0 55px red,
+        0 0 75px red;
+    }
+  }
+
+.author {
+  margin-bottom: 5px;
+}
+
+.author-name {
+  display: inline;
+  font-size: 20px;
+}
+
+a[class*='link']:active {
+  color: red;
+}
+
+.link-github {
+  margin-right: 5px;
+  text-decoration: none;
+  color: white;
+}
+
+.link-linkedin {
+  margin-right: 5px;
+  text-decoration: none;
+  color: blue;
+}
+
+.container-index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 37px;
+  margin-bottom: 10px;
+}
+
+div[class*='index-'] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 7px;
+}
+
+.black {
+  width: 12px;
+  height: 12px;
   background-color: black;
-  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 3px;
+}
+
+.white {
+  width: 2px;
+  height: 10px;
+  background-color: white;
+}
+
+div[class*='color']{
+  width: 12px;
+  height: 12px;
+  margin-right: 3px;
+}
+
+.control-bar {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: 30px;
+}
+
+.label-maze {
+  font-size: 20px;
+  padding: 5px;
+  border-bottom: 1px solid grey;
+  margin-bottom: 20px;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.button {
+  background: black;
+  font-size: 16px;
+  line-height: 18px;
+  padding: 10px;
+  display: block;
+  border: 5px outset;
+  border-radius: 5px;
+  color: white;
+}
+
+.button:hover {
+  box-shadow: 0px 0px 20px 5px #888880;
+  transition-duration: 0.3s;
+  transition-property: box-shadow;
+}
+.button:focus {
+  outline-width: 0;
+}
+
+.button:active {
+  border: 5px inset;
+}
+
+.button:disabled {
+  border: 5px inset;
 }

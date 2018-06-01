@@ -1,11 +1,14 @@
 import Cell from './cell.js';
 
 
-export default function SetupGrid(width) {
+export function SetupGrid(width) {
   this.mC = document.getElementById('myCanvas');
   this.ctx = this.mC.getContext("2d");
   this.cWidth = this.mC.width;
   this.cHeight = this.mC.height;
+
+  this.ctx.fillStyle = "black";
+  this.ctx.fillRect(0,0, this.cWidth, this.cHeight);
 
   this.cols = Math.floor(this.cWidth/width);
   this.rows = Math.floor(this.cHeight/width);
@@ -22,9 +25,13 @@ export default function SetupGrid(width) {
   return grid;
 }
 
-function draw (grid) {
+export function draw (grid) {
   for (let i = 0; i < grid.length; i++) {
+    grid[i].explored = false;
     grid[i].show();
+    if (grid[i].target === true) {
+      grid[i].highlight('lightskyblue');
+    }
   }
 
 }

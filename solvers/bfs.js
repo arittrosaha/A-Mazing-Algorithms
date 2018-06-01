@@ -1,58 +1,76 @@
 import { draw } from '../setup/grid.js';
 
-export default function dfsSolve(maze) {
+export default function bfsSolve(maze) {
+  const bfsSolButton = document.getElementById('bfs-sol');
+  bfsSolButton.disabled = true;
+
   const dfsSolButton = document.getElementById('dfs-sol');
   dfsSolButton.disabled = true;
 
   const dfsGenButton = document.getElementById('dfs-gen');
   dfsGenButton.disabled = true;
 
-  const bfsSolButton = document.getElementById('bfs-sol');
-  bfsSolButton.disabled = true;
-
   draw(maze);
 
-  const stack = [];
+  const queue = [];
+  const exploredPaths = [];
   let targetFound = false;
   let color = 'green';
   let neighbours;
-  let next;
+  let nextPaths;
 
   let current = maze[0];
   current.explored = true;
 
   const interval =  setInterval( () => {
+
+    current.highlight(color);
     current.show(color);
 
-    if (current.target === true){
-      targetFound = true;
-      color = 'blue';
-      current.highlight('lightskyblue');
-      current.show('lightskyblue');
+    if (exploredPaths.length > 0){
+      exploredPaths.forEach( () => {
+        exploredPaths.pop().show(color);
+      });
     }
 
     if (targetFound === false) {
        neighbours = current.neighbours("explored");
-       next = selectNeighbour(current, neighbours);
+       nextPaths = selectNeighbour(current, neighbours);
     }
 
-    if (next && !next.explored) {
-      next.explored = true;
-      stack.push(current);
-      current.show(color);
-      next.highlight('yellow');
-      current = next;
-    } else if (stack.length > 0){
-      current = stack.pop();
-      current.highlight('yellow');
-      current.show("yellow");
+    if (nextPaths && targetFound === false) {
+      for (let i = 0; i < nextPaths.length; i++) {
+        nextPaths[i].highlight('yellow');
+        nextPaths[i].explored = true;
+        if (nextPaths[i].target === true){
+          targetFound = true;
+          color = 'blue';
+          nextPaths[i].highlight('lightskyblue');
+          nextPaths[i].show('lightskyblue');
+          current = nextPaths[i];
+          break;
+        } else {
+          exploredPaths.push(nextPaths[i]);
+          queue.push(nextPaths[i]);
+        }
+      }
     }
+
+    if (targetFound === false) {
+      current = queue.shift();
+    }
+
+    if (targetFound === true) {
+      current = current.parent;
+      current.highlight('yellow');
+    }
+
 
     if (current === maze[0]) {
       clearInterval(interval);
       dfsGenButton.disabled = false;
-      dfsSolButton.disabled = false;
       bfsSolButton.disabled = false;
+      dfsSolButton.disabled = false;
     }
   }, 1);
 }
@@ -78,10 +96,5 @@ function selectNeighbour (current, neighbours) {
     }
   });
 
-  const random = getRandomIntInclusive(0, nextPaths.length-1);
-  return nextPaths[random];
-}
-
-function getRandomIntInclusive(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return nextPaths;
 }
