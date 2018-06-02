@@ -4,11 +4,22 @@ export default function dfsSolve(maze) {
   const dfsSolButton = document.getElementById('dfs-sol');
   dfsSolButton.disabled = true;
 
-  const dfsGenButton = document.getElementById('dfs-gen');
-  dfsGenButton.disabled = true;
+  const easyButton = document.getElementById('easy');
+  easyButton.disabled = true;
+  const mediumButton = document.getElementById('medium');
+  mediumButton.disabled = true;
+  const hardButton = document.getElementById('hard');
+  hardButton.disabled = true;
 
   const bfsSolButton = document.getElementById('bfs-sol');
   bfsSolButton.disabled = true;
+
+  const humSolButton = document.getElementById('hum-sol');
+  humSolButton.disabled = true;
+
+  if (window.humanCallback) {
+    document.removeEventListener('keydown', window.humanCallback);
+  }
 
   draw(maze);
 
@@ -50,9 +61,12 @@ export default function dfsSolve(maze) {
 
     if (current === maze[0]) {
       clearInterval(interval);
-      dfsGenButton.disabled = false;
+      easyButton.disabled = false;
+      mediumButton.disabled = false;
+      hardButton.disabled = false;
       dfsSolButton.disabled = false;
       bfsSolButton.disabled = false;
+      humSolButton.disabled = false;
     }
   }, 1);
 }

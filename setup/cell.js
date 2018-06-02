@@ -34,6 +34,8 @@ export default function Cell(i, j, w, ctx, grid, cols, rows) {
         if (!cell.explored) {
           neighbours.push(cell);
         }
+      } else if (cell && status === 'human') {
+        neighbours.push(cell);
       }
     });
 

@@ -21,7 +21,6 @@ export function SetupGrid(width) {
     }
   }
 
-  draw(grid);
   return grid;
 }
 

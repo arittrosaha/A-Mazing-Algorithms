@@ -1,16 +1,27 @@
 import dfsSolve from '../solvers/dfs.js';
 import bfsSolve from '../solvers/bfs.js';
-
+import HumSolve from '../solvers/human.js';
 
 export default function dfsGen (grid, width) {
-  const dfsGenButton = document.getElementById('dfs-gen');
-  dfsGenButton.disabled = true;
+  const easyButton = document.getElementById('easy');
+  easyButton.disabled = true;
+  const mediumButton = document.getElementById('medium');
+  mediumButton.disabled = true;
+  const hardButton = document.getElementById('hard');
+  hardButton.disabled = true;
 
   const dfsSolButton = document.getElementById('dfs-sol');
   dfsSolButton.disabled = true;
 
   const bfsSolButton = document.getElementById('bfs-sol');
   bfsSolButton.disabled = true;
+
+  const humSolButton = document.getElementById('hum-sol');
+  humSolButton.disabled = true;
+
+  if (window.humanCallback) {
+    document.removeEventListener('keydown', window.humanCallback);
+  }
 
 
   const stack = [];
@@ -64,9 +75,16 @@ export default function dfsGen (grid, width) {
         bfsSolve(grid);
       };
 
-      dfsGenButton.disabled = false;
+      humSolButton.disabled = false;
+      humSolButton.onclick = function() {
+        new HumSolve(grid);
+      };
+
+      easyButton.disabled = false;
+      mediumButton.disabled = false;
+      hardButton.disabled = false;
     }
-  }, 1);
+  }, 0);
 }
 
 function selectNeighbour (neighbours) {

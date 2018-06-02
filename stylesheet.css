@@ -170,6 +170,8 @@ div[class*='color']{
   border: 5px outset;
   border-radius: 5px;
   color: white;
+  width: 133px;
+  margin-bottom: 20px;
 }
 
 .button:hover {

@@ -83,19 +83,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return dfsGen; });
 /* harmony import */ var _solvers_dfs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../solvers/dfs.js */ "./solvers/dfs.js");
 /* harmony import */ var _solvers_bfs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../solvers/bfs.js */ "./solvers/bfs.js");
+/* harmony import */ var _solvers_human_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../solvers/human.js */ "./solvers/human.js");
 
 
 
 
 function dfsGen (grid, width) {
-  const dfsGenButton = document.getElementById('dfs-gen');
-  dfsGenButton.disabled = true;
+  const easyButton = document.getElementById('easy');
+  easyButton.disabled = true;
+  const mediumButton = document.getElementById('medium');
+  mediumButton.disabled = true;
+  const hardButton = document.getElementById('hard');
+  hardButton.disabled = true;
 
   const dfsSolButton = document.getElementById('dfs-sol');
   dfsSolButton.disabled = true;
 
   const bfsSolButton = document.getElementById('bfs-sol');
   bfsSolButton.disabled = true;
+
+  const humSolButton = document.getElementById('hum-sol');
+  humSolButton.disabled = true;
+
+  if (window.humanCallback) {
+    document.removeEventListener('keydown', window.humanCallback);
+  }
 
 
   const stack = [];
@@ -149,9 +161,16 @@ function dfsGen (grid, width) {
         Object(_solvers_bfs_js__WEBPACK_IMPORTED_MODULE_1__["default"])(grid);
       };
 
-      dfsGenButton.disabled = false;
+      humSolButton.disabled = false;
+      humSolButton.onclick = function() {
+        new _solvers_human_js__WEBPACK_IMPORTED_MODULE_2__["default"](grid);
+      };
+
+      easyButton.disabled = false;
+      mediumButton.disabled = false;
+      hardButton.disabled = false;
     }
-  }, 1);
+  }, 0);
 }
 
 function selectNeighbour (neighbours) {
@@ -200,19 +219,29 @@ function getRandomIntInclusive(min, max) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generators/dfs.js */ "./generators/dfs.js");
-/* harmony import */ var _setup_grid_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./setup/grid.js */ "./setup/grid.js");
+/* harmony import */ var _solvers_human_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./solvers/human.js */ "./solvers/human.js");
+/* harmony import */ var _setup_grid_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./setup/grid.js */ "./setup/grid.js");
 // import setupGrid from './grid.js';
+
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const initGrid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_1__["SetupGrid"](10);
+  const easyButton = document.getElementById('easy');
+  const mediumButton = document.getElementById('medium');
+  const hardButton = document.getElementById('hard');
 
-  const dfsGenButton = document.getElementById('dfs-gen');
-  let maze;
-  dfsGenButton.onclick = function() {
-    const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_1__["SetupGrid"](10);
+  easyButton.onclick = function() {
+    const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_2__["SetupGrid"](50);
+    Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid, 50);
+  };
+  mediumButton.onclick = function() {
+    const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_2__["SetupGrid"](20);
+    Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid, 20);
+  };
+  hardButton.onclick = function() {
+    const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_2__["SetupGrid"](10);
     Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid, 10);
   };
 });
@@ -266,6 +295,8 @@ function Cell(i, j, w, ctx, grid, cols, rows) {
         if (!cell.explored) {
           neighbours.push(cell);
         }
+      } else if (cell && status === 'human') {
+        neighbours.push(cell);
       }
     });
 
@@ -384,7 +415,6 @@ function SetupGrid(width) {
     }
   }
 
-  draw(grid);
   return grid;
 }
 
@@ -422,8 +452,19 @@ function bfsSolve(maze) {
   const dfsSolButton = document.getElementById('dfs-sol');
   dfsSolButton.disabled = true;
 
-  const dfsGenButton = document.getElementById('dfs-gen');
-  dfsGenButton.disabled = true;
+  const easyButton = document.getElementById('easy');
+  easyButton.disabled = true;
+  const mediumButton = document.getElementById('medium');
+  mediumButton.disabled = true;
+  const hardButton = document.getElementById('hard');
+  hardButton.disabled = true;
+
+  const humSolButton = document.getElementById('hum-sol');
+  humSolButton.disabled = true;
+
+  if (window.humanCallback) {
+    document.removeEventListener('keydown', window.humanCallback);
+  }
 
   Object(_setup_grid_js__WEBPACK_IMPORTED_MODULE_0__["draw"])(maze);
 
@@ -483,9 +524,12 @@ function bfsSolve(maze) {
 
     if (current === maze[0]) {
       clearInterval(interval);
-      dfsGenButton.disabled = false;
+      easyButton.disabled = false;
+      mediumButton.disabled = false;
+      hardButton.disabled = false;
       bfsSolButton.disabled = false;
       dfsSolButton.disabled = false;
+      humSolButton.disabled = false;
     }
   }, 1);
 }
@@ -534,11 +578,22 @@ function dfsSolve(maze) {
   const dfsSolButton = document.getElementById('dfs-sol');
   dfsSolButton.disabled = true;
 
-  const dfsGenButton = document.getElementById('dfs-gen');
-  dfsGenButton.disabled = true;
+  const easyButton = document.getElementById('easy');
+  easyButton.disabled = true;
+  const mediumButton = document.getElementById('medium');
+  mediumButton.disabled = true;
+  const hardButton = document.getElementById('hard');
+  hardButton.disabled = true;
 
   const bfsSolButton = document.getElementById('bfs-sol');
   bfsSolButton.disabled = true;
+
+  const humSolButton = document.getElementById('hum-sol');
+  humSolButton.disabled = true;
+
+  if (window.humanCallback) {
+    document.removeEventListener('keydown', window.humanCallback);
+  }
 
   Object(_setup_grid_js__WEBPACK_IMPORTED_MODULE_0__["draw"])(maze);
 
@@ -580,9 +635,12 @@ function dfsSolve(maze) {
 
     if (current === maze[0]) {
       clearInterval(interval);
-      dfsGenButton.disabled = false;
+      easyButton.disabled = false;
+      mediumButton.disabled = false;
+      hardButton.disabled = false;
       dfsSolButton.disabled = false;
       bfsSolButton.disabled = false;
+      humSolButton.disabled = false;
     }
   }, 1);
 }
@@ -615,6 +673,196 @@ function selectNeighbour (current, neighbours) {
 function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+/***/ }),
+
+/***/ "./solvers/human.js":
+/*!**************************!*\
+  !*** ./solvers/human.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HumSolve; });
+/* harmony import */ var _setup_grid_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../setup/grid.js */ "./setup/grid.js");
+
+
+function HumSolve (maze) {
+
+  Object(_setup_grid_js__WEBPACK_IMPORTED_MODULE_0__["draw"])(maze);
+
+  let current = maze[0];
+  let previousPath = [];
+  let targetFound = false;
+
+  current.highlight('yellow');
+  current.explored = true;
+
+  window.humanCallback = (event) => {
+    if (event.defaultPrevented) {
+      return;
+    }
+
+    let newCurrent = null;
+    switch (event.key) {
+      case "ArrowDown":
+        previousPath.push(current);
+        newCurrent = selectNeighbour(current, event.key);
+        if (newCurrent) {
+          current = newCurrent;
+          if (current.target === true) {
+            targetFound = true;
+            pathBack(current, window.humanCallback);
+          }
+          renderCurrent (current, previousPath);
+        } else {
+          document.removeEventListener('keydown', window.humanCallback);
+          new HumSolve (maze);
+        }
+        break;
+      case "ArrowUp":
+        previousPath.push(current);
+        newCurrent = selectNeighbour(current, event.key);
+        if (newCurrent) {
+          current = newCurrent;
+          if (current.target === true) {
+            targetFound = true;
+            pathBack(current, window.humanCallback);
+          }
+          renderCurrent (current, previousPath);
+        } else {
+          document.removeEventListener('keydown', window.humanCallback);
+          new HumSolve (maze);
+        }
+        break;
+      case "ArrowLeft":
+        previousPath.push(current);
+        newCurrent = selectNeighbour(current, event.key);
+        if (newCurrent) {
+          current = newCurrent;
+          if (current.target === true) {
+            targetFound = true;
+            pathBack(current, window.humanCallback);
+          }
+          renderCurrent (current, previousPath);
+        } else {
+          document.removeEventListener('keydown', window.humanCallback);
+          new HumSolve (maze);
+        }
+        break;
+      case "ArrowRight":
+        previousPath.push(current);
+        newCurrent = selectNeighbour(current, event.key);
+        if (newCurrent) {
+          current = newCurrent;
+          if (current.target === true) {
+            targetFound = true;
+            pathBack(current, window.humanCallback);
+          }
+          renderCurrent (current, previousPath);
+        } else {
+          document.removeEventListener('keydown', window.humanCallback);
+          new HumSolve (maze);
+        }
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+  };
+
+  document.addEventListener("keydown", window.humanCallback);
+}
+
+function renderCurrent (current, previousPath) {
+  if (current === undefined) {
+    return;
+  }
+  renderPrevious (previousPath);
+  current.explored = true;
+  current.highlight('yellow');
+}
+
+function renderPrevious (previous) {
+  if (previous.length > 0) {
+    previous.pop().show("green");
+  }
+}
+
+function pathBack (current, callback) {
+  const interval = setInterval ( () => {
+    current.highlight("blue");
+    current.show("blue");
+
+    if (current.target === true) {
+      current.highlight('lightskyblue');
+      current.show('lightskyblue');
+    }
+    current = current.parent;
+    current.highlight('yellow');
+
+    if (current.parent === null) {
+      clearInterval(interval);
+      document.removeEventListener('keydown', callback);
+      console.log('removed');
+    }
+  }, 1);
+}
+
+
+function selectNeighbour (current, key) {
+  const neighbours = current.neighbours('human');
+  const walls = current.walls;
+  const nextPaths = [null, null, null, null];
+
+  neighbours.forEach( neighbour => {
+    const x = current.i - neighbour.i;
+    const y = current.j - neighbour.j;
+
+    if (x === -1 && !walls[1]) {
+      nextPaths[1] = neighbour;
+    } else if (x === 1 && !walls[3]) {
+      nextPaths[3] = neighbour;
+    }
+
+    if (y === -1 && !walls[2]) {
+      nextPaths[2] = neighbour;
+    } else if (y === 1 && !walls[0]) {
+      nextPaths[0] = neighbour;
+    }
+  });
+
+  switch (key) {
+    case "ArrowUp":
+      return nextPaths[0];
+    case "ArrowRight":
+      return nextPaths[1];
+    case "ArrowDown":
+      return nextPaths[2];
+    case "ArrowLeft":
+      return nextPaths[3];
+    default:
+      return;
+  }
+}
+
+
+
+// document.addEventListener('keyup', function (event) {
+//   if (event.defaultPrevented) {
+//       return;
+//   }
+//
+//   var key = event.key || event.keyCode;
+//
+//   if (key === 'Escape' || key === 'Esc' || key === 27) {
+//       doWhateverYouWantNowThatYourKeyWasHit();
+//   }
+// });
 
 
 /***/ })
