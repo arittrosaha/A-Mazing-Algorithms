@@ -118,7 +118,7 @@ function pathBack (current, callback) {
     if (current.parent === null) {
       clearInterval(interval);
       document.removeEventListener('keydown', callback);
-      console.log('removed');
+      document.getElementById('hum-sol').classList.remove('press');
     }
   }, 1);
 }

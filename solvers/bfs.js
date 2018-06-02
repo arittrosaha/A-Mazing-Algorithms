@@ -16,6 +16,7 @@ export default function bfsSolve(maze) {
 
   const humSolButton = document.getElementById('hum-sol');
   humSolButton.disabled = true;
+  humSolButton.classList.remove('press');
 
   if (window.humanCallback) {
     document.removeEventListener('keydown', window.humanCallback);
@@ -82,9 +83,12 @@ export default function bfsSolve(maze) {
       easyButton.disabled = false;
       mediumButton.disabled = false;
       hardButton.disabled = false;
+
       bfsSolButton.disabled = false;
       dfsSolButton.disabled = false;
       humSolButton.disabled = false;
+
+      bfsSolButton.classList.remove('press');
     }
   }, 1);
 }

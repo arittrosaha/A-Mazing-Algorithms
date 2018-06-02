@@ -13,6 +13,7 @@ export default function Cell(i, j, w, ctx, grid, cols, rows) {
 
     ctx.fillStyle = color;
     ctx.fillRect(x, y, w, w);
+    buildWalls(x, y, w, ctx, this.walls);
   };
 
   this.neighbours = function(status) {

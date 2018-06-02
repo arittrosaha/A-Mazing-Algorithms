@@ -2,14 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Maze Solver</title>
+    <title>A Mazing Game</title>
+    <link rel="icon" href="./images/favicon-gamepad.ico">
     <script src="bundle.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   </head>
   <body>
     <div class='header'>
-      <div class='game-name'>A Mazing Algorithms</div>
+      <div class='game-name'>A Mazing Game</div>
       <div class="author">by
         <div class="author-name">Aritra Saha</div>
       </div>
@@ -23,7 +24,6 @@
       </div>
     </div>
     <div class='container-index'>
-      <!-- <label class='label-index'>Index</label> -->
       <div class="index-wall">
         <div class="black">
           <div class="white"></div>
@@ -70,6 +70,11 @@
         <input id='dfs-sol' type='button' class='button' value='Using DFS'>
         <input id='bfs-sol' type='button' class='button' value='Using BFS'>
         <input id='hum-sol' type='button' class='button' value='Solve Yourself'>
+        <div class="instructions">
+          <div class='inst1'>Use the following keys to navigate</div>
+          <img class='keyboard-image'src="./images/keyboard-arrows.png">
+          <div class='inst2'>But if you hit the wall, you start over</div>
+        </div>
       </div>
     </div>
   </body>

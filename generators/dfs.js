@@ -18,11 +18,11 @@ export default function dfsGen (grid, width) {
 
   const humSolButton = document.getElementById('hum-sol');
   humSolButton.disabled = true;
+  humSolButton.classList.remove('press');
 
   if (window.humanCallback) {
     document.removeEventListener('keydown', window.humanCallback);
   }
-
 
   const stack = [];
 
@@ -68,17 +68,24 @@ export default function dfsGen (grid, width) {
       dfsSolButton.disabled = false;
       dfsSolButton.onclick = function() {
         dfsSolve(grid);
+        dfsSolButton.classList.add('press');
       };
 
       bfsSolButton.disabled = false;
       bfsSolButton.onclick = function() {
         bfsSolve(grid);
+        bfsSolButton.classList.add('press');
       };
 
       humSolButton.disabled = false;
       humSolButton.onclick = function() {
         new HumSolve(grid);
+        humSolButton.classList.add('press');
       };
+
+      easyButton.classList.remove('press');
+      mediumButton.classList.remove('press');
+      hardButton.classList.remove('press');
 
       easyButton.disabled = false;
       mediumButton.disabled = false;

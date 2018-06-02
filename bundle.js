@@ -104,11 +104,11 @@ function dfsGen (grid, width) {
 
   const humSolButton = document.getElementById('hum-sol');
   humSolButton.disabled = true;
+  humSolButton.classList.remove('press');
 
   if (window.humanCallback) {
     document.removeEventListener('keydown', window.humanCallback);
   }
-
 
   const stack = [];
 
@@ -154,17 +154,24 @@ function dfsGen (grid, width) {
       dfsSolButton.disabled = false;
       dfsSolButton.onclick = function() {
         Object(_solvers_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid);
+        dfsSolButton.classList.add('press');
       };
 
       bfsSolButton.disabled = false;
       bfsSolButton.onclick = function() {
         Object(_solvers_bfs_js__WEBPACK_IMPORTED_MODULE_1__["default"])(grid);
+        bfsSolButton.classList.add('press');
       };
 
       humSolButton.disabled = false;
       humSolButton.onclick = function() {
         new _solvers_human_js__WEBPACK_IMPORTED_MODULE_2__["default"](grid);
+        humSolButton.classList.add('press');
       };
+
+      easyButton.classList.remove('press');
+      mediumButton.classList.remove('press');
+      hardButton.classList.remove('press');
 
       easyButton.disabled = false;
       mediumButton.disabled = false;
@@ -235,14 +242,17 @@ document.addEventListener('DOMContentLoaded', () => {
   easyButton.onclick = function() {
     const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_2__["SetupGrid"](50);
     Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid, 50);
+    easyButton.classList.add('press');
   };
   mediumButton.onclick = function() {
     const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_2__["SetupGrid"](20);
     Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid, 20);
+    mediumButton.classList.add('press');
   };
   hardButton.onclick = function() {
     const grid = new _setup_grid_js__WEBPACK_IMPORTED_MODULE_2__["SetupGrid"](10);
     Object(_generators_dfs_js__WEBPACK_IMPORTED_MODULE_0__["default"])(grid, 10);
+    hardButton.classList.add('press');
   };
 });
 
@@ -274,6 +284,7 @@ function Cell(i, j, w, ctx, grid, cols, rows) {
 
     ctx.fillStyle = color;
     ctx.fillRect(x, y, w, w);
+    buildWalls(x, y, w, ctx, this.walls);
   };
 
   this.neighbours = function(status) {
@@ -461,6 +472,7 @@ function bfsSolve(maze) {
 
   const humSolButton = document.getElementById('hum-sol');
   humSolButton.disabled = true;
+  humSolButton.classList.remove('press');
 
   if (window.humanCallback) {
     document.removeEventListener('keydown', window.humanCallback);
@@ -527,9 +539,12 @@ function bfsSolve(maze) {
       easyButton.disabled = false;
       mediumButton.disabled = false;
       hardButton.disabled = false;
+
       bfsSolButton.disabled = false;
       dfsSolButton.disabled = false;
       humSolButton.disabled = false;
+
+      bfsSolButton.classList.remove('press');
     }
   }, 1);
 }
@@ -590,6 +605,7 @@ function dfsSolve(maze) {
 
   const humSolButton = document.getElementById('hum-sol');
   humSolButton.disabled = true;
+  humSolButton.classList.remove('press');
 
   if (window.humanCallback) {
     document.removeEventListener('keydown', window.humanCallback);
@@ -638,9 +654,12 @@ function dfsSolve(maze) {
       easyButton.disabled = false;
       mediumButton.disabled = false;
       hardButton.disabled = false;
+
       dfsSolButton.disabled = false;
       bfsSolButton.disabled = false;
       humSolButton.disabled = false;
+
+      dfsSolButton.classList.remove('press');
     }
   }, 1);
 }
@@ -808,7 +827,7 @@ function pathBack (current, callback) {
     if (current.parent === null) {
       clearInterval(interval);
       document.removeEventListener('keydown', callback);
-      console.log('removed');
+      document.getElementById('hum-sol').classList.remove('press');
     }
   }, 1);
 }

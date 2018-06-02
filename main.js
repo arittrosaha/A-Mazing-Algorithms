@@ -12,13 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
   easyButton.onclick = function() {
     const grid = new SetupGrid(50);
     dfsGen(grid, 50);
+    easyButton.classList.add('press');
   };
   mediumButton.onclick = function() {
     const grid = new SetupGrid(20);
     dfsGen(grid, 20);
+    mediumButton.classList.add('press');
   };
   hardButton.onclick = function() {
     const grid = new SetupGrid(10);
     dfsGen(grid, 10);
+    hardButton.classList.add('press');
   };
 });

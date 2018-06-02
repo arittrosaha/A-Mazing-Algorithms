@@ -20,6 +20,7 @@ body {
 #myCanvas {
   border: 10px inset;
   border-radius: 5px;
+  margin-right: 8px;
 }
 
 .header {
@@ -39,14 +40,47 @@ body {
   margin-bottom: 5px;
   animation-timing-function: step-end, linear;
   animation-name: flicker, on;
-  animation-delay: 0s, 2s;
+  animation-delay: 1s, 3s;
   animation-duration: 1s, 1s;
   animation-fill-mode: forwards, forwards;
 
 }
 
   @-webkit-keyframes flicker {
-    75%  {
+    10% {
+      color: white;
+      text-shadow:
+        0 0 5px white,
+        0 0 10px white,
+        0 0 20px red,
+        0 0 30px red,
+        0 0 40px red,
+        0 0 55px red,
+        0 0 75px red;
+    }
+
+    20% {
+      color: red; text-shadow: none
+    }
+
+    30% {
+      color: white;
+      text-shadow:
+        0 0 5px white,
+        0 0 10px white,
+        0 0 20px red,
+        0 0 30px red,
+        0 0 40px red,
+        0 0 55px red,
+        0 0 75px red;
+    }
+
+    40% {
+      color: red; text-shadow: none
+    }
+
+
+    80% {
       color: white;
       text-shadow:
         0 0 5px white,
@@ -59,7 +93,7 @@ body {
     }
 
     100% {
-        color: red; text-shadow: none
+      color: red; text-shadow: none
     }
   }
 
@@ -106,7 +140,7 @@ a[class*='link']:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 37px;
+  margin-left: 15px;
   margin-bottom: 10px;
 }
 
@@ -167,9 +201,13 @@ div[class*='color']{
   line-height: 18px;
   padding: 10px;
   display: block;
-  border: 5px outset;
+  border: 7px outset;
   border-radius: 5px;
-  color: white;
+  color: lightgreen;
+  text-shadow:
+    0 0 5px green,
+    0 0 10px green,
+    0 0 20px green;
   width: 133px;
   margin-bottom: 20px;
 }
@@ -184,9 +222,24 @@ div[class*='color']{
 }
 
 .button:active {
-  border: 5px inset;
+  border: 7px inset;
 }
 
 .button:disabled {
-  border: 5px inset;
+  color: green;
+  text-shadow: none;
+}
+
+.button[class*='press'] {
+  border: 7px inset;
+}
+
+.instructions {
+  width: 133px;
+  text-align: center;
+}
+
+.keyboard-image{
+  margin-top: 5px;
+  width: 133px;
 }
