@@ -210,6 +210,7 @@ div[class*='color']{
     0 0 20px green;
   width: 133px;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .button:hover {
