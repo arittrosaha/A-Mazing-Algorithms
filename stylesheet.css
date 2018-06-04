@@ -118,6 +118,7 @@ body {
 .author-name {
   display: inline;
   font-size: 20px;
+  color: white;
 }
 
 a[class*='link']:active {
