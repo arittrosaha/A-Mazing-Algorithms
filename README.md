@@ -16,6 +16,7 @@ Note - The application is hosted in GitHub.
 
 ## How does it work?
 Step 1 - Select difficulty level between Easy, Medium and Hard to generate an easy, medium or hard maze respectively. All levels of maze generation is done using a DFS algorithm, currently.
+
 Step 2 - Select a mode to solve the maze from the following options:
 * DFS - The maze will be solved using a DFS algorithm.
 * BFS - The maze will be solved using a BFS algorithm.
