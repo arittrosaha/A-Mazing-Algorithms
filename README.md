@@ -15,12 +15,17 @@ Note - The application is hosted in GitHub.
 
 
 ## How does it work?
-Step 1 - Select difficulty level between Easy, Medium and Hard to generate an easy, medium or hard maze respectively. All levels of maze generation is done using a DFS algorithm, currently.
 
-Step 2 - Select a mode to solve the maze from the following options:
+<img src="gifs/solve_maze.gif" alt="Solve Maze" align = "right" />
+<img src="gifs/generate_maze.gif" alt="Generate Maze" align = "right" />
+
+Step 1 (Generate Maze) - Select difficulty level between Easy, Medium and Hard to generate an easy, medium or hard maze respectively. All levels of maze generation is done using a DFS algorithm, currently.
+
+Step 2 (Solve Maze) - Select a mode to solve the maze from the following options:
 * DFS - The maze will be solved using a DFS algorithm.
 * BFS - The maze will be solved using a BFS algorithm.
 * Solve Yourself - Use the up, down, left and right arrow keys to navigate through the maze. But if you hit a wall, you will start over.
+
 
 ## Keys
 * **White** indicates walls.
