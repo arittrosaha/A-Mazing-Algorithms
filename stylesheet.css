@@ -43,7 +43,6 @@ body {
   animation-delay: 1s, 3s;
   animation-duration: 1s, 1s;
   animation-fill-mode: forwards, forwards;
-
 }
 
   @-webkit-keyframes flicker {
