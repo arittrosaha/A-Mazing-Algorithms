@@ -27,12 +27,37 @@ Step 2 (Solve Maze) - Select a mode to solve the maze from the following options
 * Solve Yourself - Use the up, down, left and right arrow keys to navigate through the maze. But if you hit a wall, you will start over.
 
 
-## Keys
+
+## Detailed Breakdown
+### Keys
+<img src="images/keys.png" alt="Keys" />
+
 * **White** indicates walls.
 * **Red** indicates maze path.
 * **Light Blue** indicates the target or finish.
 * **Gree** indicates portion of the maze that has been explored.
 * **Dark Blue** indicates the shortest path from finish to back start.
+
+### Setup
+| Grid | Cell |
+-------|-------
+
+
+### Generate Maze
+| Render | Code Snippet |
+---------|---------------
+<img src="gifs/hard_generate.gif" alt="Generating a hard maze" />|<img src="images/dfs_gen.png" alt="Code snippet for generateing a maze with DFS" />
+
+**Render** - This is a visulization of a generating maze with DFS after the Hard button is pressed.
+
+**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 and DFS algorithm, respectively. This is an itterative implementation of DFS. 
+* Animation rate - The need for a continuous loop and a way to control the rate of animation is achieved by the use of setInterval asynchronous function. While 0 milliseconds is passed in this setInterval function (code not visible in this snippet), the minimum default time value is 4ms for HTML5. Therefore, the frame rate is 1 frame per 4 ms.
+* Line 41 to 55 - The main portion of the code handling the DFS logic.
+* Line 57 and bellow - Selects a random target from the last row.
+
+### Solve Maze
+
+
 
 ## Future Plans
 ### Generating the maze
