@@ -68,13 +68,56 @@ Render | Code Snippet
 
 **Render** - This is a visualization of a generating maze with DFS after the Hard button is pressed.
 
-**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 and DFS algorithm, respectively. This is an iterative implementation of DFS.
+**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 Canvas and DFS algorithm, respectively. This is an iterative implementation of DFS.
 * Animation rate - The need for a continuous loop and a way to control the rate of animation is achieved by the use of setInterval asynchronous function. While 0 milliseconds is passed in this setInterval function (code not visible in this snippet), the minimum default time value is 4ms for HTML5. Therefore, the frame rate is 1 frame per 4 ms.
 * Line 41 to 55 - The main portion of the code handling the DFS logic.
 * Line 57 and bellow - Selects a random target from the last row.
 
 ### Solve Maze
 
+<table>
+  <tr>
+    <td align="center" colspan="2">DFS Solve</td>
+  </tr>
+  <tr>
+    <td>Render</td>
+    <td>Code Snippet</td>
+  </tr>
+  <tr>
+    <td><img src="gifs/dfs_solve.gif" alt="Solving a hard maze with DFS" /></td>
+    <td><img src="images/dfs_solve.png" alt="Code snippet for solving a hard maze with DFS" /></td>
+  </tr>
+</table>
+
+**Render** - This is a visualization of solving a hard maze with DFS. Yellow is the current location.
+
+**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 Canvas and DFS algorithm, respectively. This is an iterative implementation of DFS.
+* Animation rate - The need for a continuous loop and a way to control the rate of animation is achieved by the use of setInterval asynchronous function. While 0 milliseconds is passed in this setInterval function (code not visible in this 
+* Line 39 to 44 - After target is found, this code ensures line 46 to 49 are skipped, triggering a recursive backtrack to the start indicating the shortest way back.
+* Line 46 to 56 - The main portion of the code handling the DFS logic.
+* Line 57 to 61 - The portion that handles back tracking to the start postion once target is found revealing the shortest path from start to finish.
+
+<table>
+  <tr>
+    <td align="center" colspan="2">BFS Solve</td>
+  </tr>
+  <tr>
+    <td>Render</td>
+    <td>Code Snippet</td>
+  </tr>
+  <tr>
+    <td><img src="gifs/bfs_solve.gif" alt="Solving a hard maze with BFS" /></td>
+    <td><img src="images/bfs_solve.png" alt="Code snippet for solving a hard maze with BFS" /></td>
+  </tr>
+</table>
+
+**Render** - This is a visualization of solving a hard maze with BFS. Yellow is the current location.
+
+**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 Canvas and BFS algorithm, respectively.
+* Animation rate - The need for a continuous loop and a way to control the rate of animation is achieved by the use of setInterval asynchronous function. While 0 milliseconds is passed in this setInterval function (code not visible in this 
+* Line 39 to 46 - Code to handle Canvas rendering based on a cell's attributes.
+* Line 48 to 73 - The main portion of the code handling the BFS logic.
+* Target Found - Once target is found, it back tracks using each cell's parent to reveal the shortest path from start to finish. The portion of the code responsible for this is not visible in this snippet.
 
 
 
