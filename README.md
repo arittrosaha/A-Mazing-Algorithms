@@ -39,23 +39,42 @@ Step 2 (Solve Maze) - Select a mode to solve the maze from the following options
 * **Dark Blue** indicates the shortest path from finish to back start.
 
 ### Setup
-| Grid | Cell |
--------|-------
+Grid | Cell
+-----|-----
+<img src="images/grid_b.png" alt="Grid" />|<img src="images/cell_b.png" alt="Cell" />
+
+**Grid** - Usually grids, when made with array, are made with a 2D array. However, for this project, I did it with a 1D array by having each Cell's position (i, j) saved as attributes with in them.
+* Function SetupGrid is used to make the grid by creating all Cell objects necessary.
+* The width provided to the function determines the density of the grid when divided by the width (a constant) of the Canvas itself which is 500px.
+  * Easy - width is 50; 500/50 = 10 x 10 cells
+  * Medium - width is 20; 500/20 = 25 x 25 cells
+  * Hard - width is 10; 500/10 = 50 x 50 cells
+
+**Cell** - Each cell carries the following information:
+  * Position (i, j)
+  * If the cell is visited or not for aiding in generation rendering
+  * If the cell is explored or not for aiding in solving rendering
+  * [true/false, true/false, true/false, true/false] stores the presence or lack there of top, right, bottom, left wall respectively.
+  * If the cell is a target or not.
+  * The cell's parent
+  * The cell's children or as its called here, neighbours.
+  * The Cell object has other instance function called show for rendering it in canvas accurately based on the above information (its different attributes).
 
 
 ### Generate Maze
-| Render | Code Snippet |
----------|---------------
-<img src="gifs/hard_generate.gif" alt="Generating a hard maze" />|<img src="images/dfs_gen.png" alt="Code snippet for generateing a maze with DFS" />
+Render | Code Snippet
+-------|-------------
+<img src="gifs/hard_generate.gif" alt="Generating a hard maze" />|<img src="images/dfs_gen_b.png" alt="Code snippet for generating a maze with DFS" />
 
-**Render** - This is a visulization of a generating maze with DFS after the Hard button is pressed.
+**Render** - This is a visualization of a generating maze with DFS after the Hard button is pressed.
 
-**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 and DFS algorithm, respectively. This is an itterative implementation of DFS. 
+**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 and DFS algorithm, respectively. This is an iterative implementation of DFS.
 * Animation rate - The need for a continuous loop and a way to control the rate of animation is achieved by the use of setInterval asynchronous function. While 0 milliseconds is passed in this setInterval function (code not visible in this snippet), the minimum default time value is 4ms for HTML5. Therefore, the frame rate is 1 frame per 4 ms.
 * Line 41 to 55 - The main portion of the code handling the DFS logic.
 * Line 57 and bellow - Selects a random target from the last row.
 
 ### Solve Maze
+
 
 
 
@@ -73,4 +92,3 @@ A player will need to make two choice to generate a map:
 **Solving Yourself**:
   * Top 10 lowest time will be displayed alongside a provided username, that is appropriate, per level bellow the map.
   * A countdown will be displayed as soon as a human clicks the Solving Yourself button and will run until the target is reached.
-    
