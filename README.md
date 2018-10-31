@@ -91,7 +91,7 @@ Render | Code Snippet
 
 **Render** - This is a visualization of solving a hard maze with DFS. Yellow is the current location.
 
-**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 Canvas and DFS algorithm, respectively. This is an iterative implementation of DFS.
+**Code Snippet** - This is a portion of the code to render and solve a maze using HTML5 Canvas and DFS algorithm, respectively. This is an iterative implementation of DFS.
 * Animation rate - The need for a continuous loop and a way to control the rate of animation is achieved by the use of setInterval asynchronous function. While 0 milliseconds is passed in this setInterval function (code not visible in this
 * Line 39 to 44 - After target is found, this code ensures line 46 to 49 are skipped, triggering a recursive backtrack to the start indicating the shortest way back.
 * Line 46 to 56 - The main portion of the code handling the DFS logic.
@@ -113,11 +113,30 @@ Render | Code Snippet
 
 **Render** - This is a visualization of solving a hard maze with BFS. Yellow is the current location.
 
-**Code Snippet** - This is a portion of the code to render and create a maze using HTML5 Canvas and BFS algorithm, respectively.
+**Code Snippet** - This is a portion of the code to render and solve a maze using HTML5 Canvas and BFS algorithm, respectively.
 * Animation rate - The need for a continuous loop and a way to control the rate of animation is achieved by the use of setInterval asynchronous function. While 0 milliseconds is passed in this setInterval function (code not visible in this
-* Line 39 to 46 - Code to handle Canvas rendering based on a cell's attributes.
 * Line 48 to 73 - The main portion of the code handling the BFS logic.
-* Target Found - Once target is found, it back tracks using each cell's parent to reveal the shortest path from start to finish. The portion of the code responsible for this is not visible in this snippet.
+* Line 75 to 78 - Once target is found, it back tracks using each cell's parent to reveal the shortest path from start to finish.
+
+<table>
+  <tr>
+    <td align="center" colspan="2">Solve Yourself</td>
+  </tr>
+  <tr>
+    <td>Render</td>
+    <td>Code Snippet</td>
+  </tr>
+  <tr>
+    <td><img src="gifs/solve_yourself.gif" alt="Solving an Easy maze by yourself" /></td>
+    <td><img src="images/solving_yourself.png" alt="Code snippet for handling key strokes to solve a maze yourself" /></td>
+  </tr>
+</table>
+
+**Render** - This is a visualization of solving an Easy maze by yourself. Yellow is the current location.
+
+**Code Snippet** - This is a portion of the code to render and handle key inputs by HTML5 Canvas and vanilla JavaScript event listeners for keys, respectively.
+* Line 48 to 73 - The main portion of the code handling the BFS logic.
+* Line 75 to 78 - Once target is found, it back tracks using each cell's parent to reveal the shortest path from start to finish.
 
 
 
