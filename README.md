@@ -134,9 +134,13 @@ Render | Code Snippet
 
 **Render** - This is a visualization of solving an Easy maze by yourself. Yellow is the current location.
 
-**Code Snippet** - This is a portion of the code to render and handle key inputs by HTML5 Canvas and vanilla JavaScript event listeners for keys, respectively.
-* Line 48 to 73 - The main portion of the code handling the BFS logic.
-* Line 75 to 78 - Once target is found, it back tracks using each cell's parent to reveal the shortest path from start to finish.
+**Code Snippet** - This is a portion of the code to render and handle key inputs by HTML5 Canvas and vanilla JavaScript event listeners for keys, respectively. I have utilized switch and case syntax to handle what needs to be done when respective keys are pressed.
+* Line 21 to 35 :
+  * Line 22 - current cell is pushed to previousPath so it can rendered as explored.
+  * Line 23 - newCurrent cell is selected based on the key pressed.
+  * Line 25 - if a newCurrent is found, current is reassigned with the newCurrent. 
+  * Line 26 to 29 : if current is the target, it triggers an automatic path back to start revealing the shortest path from start to finish.
+  * Line 31 to 34 : if newCurrent was not found because the pressed key encountered an obstacle, either a wall or an edge of the maze, this portion of the code penalizes the player by starting the game all over again.
 
 
 
