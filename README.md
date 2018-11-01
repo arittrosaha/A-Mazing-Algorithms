@@ -3,8 +3,9 @@
 
 Note - The application is hosted in GitHub.
 
-If you find a bug or have a recommendation to make this application better, please contact me through GitHub or my email, arittrosaha@gmail.com. Thank you very much!
+**_If you find a bug or have a recommendation to make this application better, please contact me through GitHub or my email, arittrosaha@gmail.com. Thank you very much!_**
 
+---
 ## Summary
 **Synopsis** - It is a maze game and a graph algorithm simulator that uses algorithms and data structures to generate and solve mazes while also giving an option for a player to solve the maze by themselves. It is coded with vanilla JS and rendered using HTML5 Canvas.
 
@@ -15,7 +16,7 @@ If you find a bug or have a recommendation to make this application better, plea
 * Built a customized algorithm to calculate the 2D position of a node in a 1D array.
 * Performed dynamic DOM manipulation with just vanilla JavaScript.
 
-
+---
 ## How does it work?
 
 <img src="gifs/solve_maze.gif" alt="Solve Maze" align = "right" />
@@ -29,7 +30,7 @@ Step 2 (Solve Maze) - Select a mode to solve the maze from the following options
 * Solve Yourself - Use the up, down, left and right arrow keys to navigate through the maze. But if you hit a wall, you will start over.
 
 
-
+---
 ## Detailed Breakdown
 ### Keys
 <img src="images/keys.png" alt="Keys" />
@@ -40,6 +41,7 @@ Step 2 (Solve Maze) - Select a mode to solve the maze from the following options
 * **Gree** indicates portion of the maze that has been explored.
 * **Dark Blue** indicates the shortest path from finish to back start.
 
+---
 ### Setup
 Grid | Cell
 -----|-----
@@ -62,7 +64,7 @@ Grid | Cell
   * The cell's children or as its called here, neighbours.
   * The Cell object has other instance function called show for rendering it in canvas accurately based on the above information (its different attributes).
 
-
+---
 ### Generate Maze
 Render | Code Snippet
 -------|-------------
@@ -75,6 +77,7 @@ Render | Code Snippet
 * Line 41 to 55 - The main portion of the code handling the DFS logic.
 * Line 57 and bellow - Selects a random target from the last row.
 
+---
 ### Solve Maze
 
 <table>
@@ -98,7 +101,7 @@ Render | Code Snippet
 * Line 39 to 44 - After target is found, this code ensures line 46 to 49 are skipped, triggering a recursive backtrack to the start indicating the shortest way back.
 * Line 46 to 56 - The main portion of the code handling the DFS logic.
 * Line 57 to 61 - The portion that handles back tracking to the start postion once target is found revealing the shortest path from start to finish.
-
+---
 <table>
   <tr>
     <td align="center" colspan="2"><b>BFS Solve</b></td>
@@ -119,7 +122,7 @@ Render | Code Snippet
 * Animation rate - The need for a continuous loop and a way to control the rate of animation is achieved by the use of setInterval asynchronous function. While 0 milliseconds is passed in this setInterval function (code not visible in this
 * Line 48 to 73 - The main portion of the code handling the BFS logic.
 * Line 75 to 78 - Once target is found, it back tracks using each cell's parent to reveal the shortest path from start to finish.
-
+---
 <table>
   <tr>
     <td align="center" colspan="2"><b>Solve Yourself</b></td>
@@ -144,7 +147,7 @@ Render | Code Snippet
   * Line 26 to 29 : if current is the target, it triggers an automatic path back to start revealing the shortest path from start to finish.
   * Line 31 to 34 : if newCurrent was not found because the pressed key encountered an obstacle, either a wall or an edge of the maze, this portion of the code penalizes the player by starting the game all over again.
 
-
+---
 ## Future Plans
 ### Generating the maze
 A player will need to make two choice to generate a map:
