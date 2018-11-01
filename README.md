@@ -3,6 +3,8 @@
 
 Note - The application is hosted in GitHub.
 
+If you find a bug or have a recommendation to make this application better, please contact me through GitHub or my email, arittrosaha@gmail.com. Thank you very much!
+
 ## Summary
 **Synopsis** - It is a maze game and a graph algorithm simulator that uses algorithms and data structures to generate and solve mazes while also giving an option for a player to solve the maze by themselves. It is coded with vanilla JS and rendered using HTML5 Canvas.
 
@@ -77,11 +79,11 @@ Render | Code Snippet
 
 <table>
   <tr>
-    <td align="center" colspan="2">DFS Solve</td>
+    <td align="center" colspan="2"><b>DFS Solve</b></td>
   </tr>
   <tr>
-    <td>Render</td>
-    <td>Code Snippet</td>
+    <td align="center"><b>Render</b></td>
+    <td align="center"><b>Code Snippet</b></td>
   </tr>
   <tr>
     <td><img src="gifs/dfs_solve.gif" alt="Solving a hard maze with DFS" /></td>
@@ -99,11 +101,11 @@ Render | Code Snippet
 
 <table>
   <tr>
-    <td align="center" colspan="2">BFS Solve</td>
+    <td align="center" colspan="2"><b>BFS Solve</b></td>
   </tr>
   <tr>
-    <td>Render</td>
-    <td>Code Snippet</td>
+    <td align="center"><b>Render</b></td>
+    <td align="center"><b>Code Snippet</b></td>
   </tr>
   <tr>
     <td><img src="gifs/bfs_solve.gif" alt="Solving a hard maze with BFS" /></td>
@@ -120,15 +122,15 @@ Render | Code Snippet
 
 <table>
   <tr>
-    <td align="center" colspan="2">Solve Yourself</td>
+    <td align="center" colspan="2"><b>Solve Yourself</b></td>
   </tr>
   <tr>
-    <td>Render</td>
-    <td>Code Snippet</td>
+    <td align="center"><b>Render</b></td>
+    <td align="center"><b>Code Snippet</b></td>
   </tr>
   <tr>
     <td><img src="gifs/solve_yourself.gif" alt="Solving an Easy maze by yourself" /></td>
-    <td><img src="images/solving_yourself.png" alt="Code snippet for handling key strokes to solve a maze yourself" /></td>
+    <td><img src="images/solve_yourself.png" alt="Code snippet for handling key strokes to solve a maze yourself" /></td>
   </tr>
 </table>
 
@@ -141,7 +143,6 @@ Render | Code Snippet
   * Line 25 - if a newCurrent is found, current is reassigned with the newCurrent. 
   * Line 26 to 29 : if current is the target, it triggers an automatic path back to start revealing the shortest path from start to finish.
   * Line 31 to 34 : if newCurrent was not found because the pressed key encountered an obstacle, either a wall or an edge of the maze, this portion of the code penalizes the player by starting the game all over again.
-
 
 
 ## Future Plans
@@ -158,3 +159,7 @@ A player will need to make two choice to generate a map:
 **Solving Yourself**:
   * Top 10 lowest time will be displayed alongside a provided username, that is appropriate, per level bellow the map.
   * A countdown will be displayed as soon as a human clicks the Solving Yourself button and will run until the target is reached.
+  
+### More controls 
+  * Give user the control of changing the animation speed of generating and solving mazes with algorithms.
+  * Give user an option to use a virtual up, down, left and right button in the case the user wishes to play through a touch screen.
