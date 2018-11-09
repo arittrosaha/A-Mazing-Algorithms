@@ -9,7 +9,7 @@ Note - The application is hosted in GitHub.
 ## Summary
 **Synopsis** - It is a maze game and a graph algorithm simulator that uses algorithms and data structures to generate and solve mazes while also giving an option for a player to solve the maze by themselves. It is coded with vanilla JS and rendered using HTML5 Canvas.
 
-**Stack** - JS, HTML5, CSS3, Canvas.
+**Stack** - Vanilla JS, HTML5, CSS3, Canvas.
 
 **Key Points**:
 * Implemented graph traversal algorithms such as DFS and BFS to generate and solve mazes.
