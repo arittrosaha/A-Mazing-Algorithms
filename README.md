@@ -1,5 +1,5 @@
 # A-Mazing Game
-[Live Site!](https://arittrosaha.github.io/A-Mazing-Game/)
+[Live Site!](https://arittrosaha.github.io/A-Mazing-Game/) - Before testing the site, please try to read the following readme in it's entirety.
 
 Note - The application is hosted in GitHub.
 
